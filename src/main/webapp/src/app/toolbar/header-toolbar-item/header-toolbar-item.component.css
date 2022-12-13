@@ -1,0 +1,12 @@
+.toolbar-item {
+  display: inline-block;
+  margin: 10px;
+}
+
+.toolbar-item:hover {
+  color: purple;
+}
+
+a.active {
+    color: purple;
+}
