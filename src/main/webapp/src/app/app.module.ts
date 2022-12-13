@@ -14,9 +14,20 @@ import { BoardingPageComponent } from './pages/boarding-page/boarding-page.compo
 import { DaycarePageComponent } from './pages/daycare-page/daycare-page.component';
 import { GroomingPageComponent } from './pages/grooming-page/grooming-page.component';
 import { HeaderToolbarItemComponent } from './toolbar/header-toolbar-item/header-toolbar-item.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderToolbarComponent, HomePageComponent, BoardingPageComponent, DaycarePageComponent, GroomingPageComponent, HeaderToolbarItemComponent],
+  declarations: [
+    AppComponent,
+    HeaderToolbarComponent,
+    HomePageComponent,
+    BoardingPageComponent,
+    DaycarePageComponent,
+    GroomingPageComponent,
+    HeaderToolbarItemComponent,
+    MobileSidenavComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -24,6 +35,7 @@ import { HeaderToolbarItemComponent } from './toolbar/header-toolbar-item/header
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatSidenavModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
