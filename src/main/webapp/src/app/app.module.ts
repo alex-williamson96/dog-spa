@@ -16,6 +16,7 @@ import { GroomingPageComponent } from './pages/grooming-page/grooming-page.compo
 import { HeaderToolbarItemComponent } from './toolbar/header-toolbar-item/header-toolbar-item.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
+import { MobileSidenavButtonComponent } from './mobile-sidenav/mobile-sidenav-button/mobile-sidenav-button.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.componen
     GroomingPageComponent,
     HeaderToolbarItemComponent,
     MobileSidenavComponent,
+    MobileSidenavButtonComponent,
   ],
   imports: [
     BrowserModule,

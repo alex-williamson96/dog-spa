@@ -1,0 +1,12 @@
+.mobile-navbar-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-navbar-item:hover {
+  color: purple;
+}
+
+a.active {
+  color: purple;
+}

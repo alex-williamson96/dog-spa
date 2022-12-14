@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./mobile-sidenav.component.css']
 })
 export class MobileSidenavComponent {
+  isOpen = true;
 
 }

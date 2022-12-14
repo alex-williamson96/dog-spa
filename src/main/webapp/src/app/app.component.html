@@ -1,5 +1,7 @@
-<app-header-toolbar *ngIf="innerWidth > 700;else mobile"></app-header-toolbar>
+<div *ngIf="innerWidth > 700; else mobile">
+  <app-header-toolbar></app-header-toolbar>
+  <router-outlet></router-outlet>
+</div>
 <ng-template #mobile>
-    <h1>Hi I am Mobile</h1>
+  <app-mobile-sidenav></app-mobile-sidenav>
 </ng-template>
-<router-outlet></router-outlet>

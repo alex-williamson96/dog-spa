@@ -7,13 +7,11 @@ import { debounce } from './decorators/debounce';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'webapp';
-  public innerWidth: any;
+  public innerWidth = window.screen.width;
 
   @HostListener('window:resize', ['$event'])
   @debounce()
   onResize(event: any) {
-    console.log(this.innerWidth)
     this.innerWidth = event.target.innerWidth;
   }
 }

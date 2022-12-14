@@ -1,0 +1,19 @@
+.mobile-drawer-container {
+  display: flex;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  bottom: 0;
+}
+
+.mobile-drawer {
+  width: 100%;
+}
+
+.icon-exit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  overflow: visible;
+  margin: 10px;
+}

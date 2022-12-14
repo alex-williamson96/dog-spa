@@ -1,1 +1,37 @@
-<p>mobile-sidenav works!</p>
+<mat-drawer-container class="mobile-drawer-container" autosize>
+  <mat-drawer mode="side" [opened]="isOpen" class="mobile-drawer">
+    <button
+      mat-icon-button
+      class="icon-exit"
+      (click)="isOpen = !isOpen">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+    <h1 style="text-align: center; margin:10px">Welcome!</h1>
+    <app-mobile-sidenav-button
+      (click)="isOpen = !isOpen"
+      name="Home"
+    ></app-mobile-sidenav-button>
+    <app-mobile-sidenav-button
+      (click)="isOpen = !isOpen"
+      name="Boarding"
+    ></app-mobile-sidenav-button>
+    <app-mobile-sidenav-button
+      (click)="isOpen = !isOpen"
+      name="Daycare"
+    ></app-mobile-sidenav-button>
+    <app-mobile-sidenav-button
+      (click)="isOpen = !isOpen"
+      name="Grooming"
+    ></app-mobile-sidenav-button>
+    <app-mobile-sidenav-button
+      (click)="isOpen = !isOpen"
+      name="Other"
+    ></app-mobile-sidenav-button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <button mat-icon-button (click)="isOpen = !isOpen">
+      <mat-icon>dehaze</mat-icon>
+    </button>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+</mat-drawer-container>
