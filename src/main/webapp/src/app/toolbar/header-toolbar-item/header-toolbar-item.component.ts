@@ -13,6 +13,6 @@ export class HeaderToolbarItemComponent implements OnInit{
   constructor(private router: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route = this.name.toLowerCase();
+    this.route = 'info/' + this.name.toLowerCase();
   }
 }

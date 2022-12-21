@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,25 @@ import { HeaderToolbarItemComponent } from './toolbar/header-toolbar-item/header
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MobileSidenavComponent } from './mobile-sidenav/mobile-sidenav.component';
 import { MobileSidenavButtonComponent } from './mobile-sidenav/mobile-sidenav-button/mobile-sidenav-button.component';
+import { AppService } from './app.service';
+import { LoginPageComponent } from './pages/login-page/login-page.component';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClientModule,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+
+@Injectable()
+export class XhrInterceptor implements HttpInterceptor {
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const xhr = req.clone({
+      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest'),
+    });
+    return next.handle(xhr);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -29,6 +48,7 @@ import { MobileSidenavButtonComponent } from './mobile-sidenav/mobile-sidenav-bu
     HeaderToolbarItemComponent,
     MobileSidenavComponent,
     MobileSidenavButtonComponent,
+    LoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,8 +58,12 @@ import { MobileSidenavButtonComponent } from './mobile-sidenav/mobile-sidenav-bu
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    AppService,
+    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

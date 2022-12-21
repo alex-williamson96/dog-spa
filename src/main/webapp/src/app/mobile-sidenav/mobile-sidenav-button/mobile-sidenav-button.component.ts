@@ -10,9 +10,9 @@ export class MobileSidenavButtonComponent implements OnInit {
   @Input('name') name!: string;
   route = 'error';
 
-  constructor(private router: ActivatedRoute) {}
+  constructor() {}
 
   ngOnInit() {
-    this.route = this.name.toLowerCase();
+    this.route = 'info/' + this.name.toLowerCase();
   }
 }
