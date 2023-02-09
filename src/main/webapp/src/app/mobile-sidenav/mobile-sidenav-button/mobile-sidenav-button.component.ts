@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { StorageService } from '../../services/security/storage.service';
 
 @Component({
   selector: 'app-mobile-sidenav-button',
@@ -9,10 +10,17 @@ import { ActivatedRoute } from '@angular/router';
 export class MobileSidenavButtonComponent implements OnInit {
   @Input('name') name!: string;
   route = 'error';
+  isLoggedIn: boolean;
 
-  constructor() {}
+  constructor(storageService: StorageService) {
+    this.isLoggedIn = storageService.isLoggedIn();
+  }
 
   ngOnInit() {
-    this.route = 'info/' + this.name.toLowerCase();
+    this.route = this.name.toLowerCase();
+
+    if (this.isLoggedIn) {
+      this.route = '/app' + this.name.toLowerCase();
+    }
   }
 }

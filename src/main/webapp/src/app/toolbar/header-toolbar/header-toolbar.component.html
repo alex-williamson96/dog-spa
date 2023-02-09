@@ -1,9 +1,29 @@
 <mat-toolbar class="toolbar">
-    <div class="tool-bar-item-container">
-        <app-header-toolbar-item name="Home"></app-header-toolbar-item>
-        <app-header-toolbar-item name="Boarding"></app-header-toolbar-item>
-        <app-header-toolbar-item name="Daycare"></app-header-toolbar-item>
-        <app-header-toolbar-item name="Grooming"></app-header-toolbar-item>
-        <app-header-toolbar-item name="Other"></app-header-toolbar-item>
-    </div>
+  <div class="tool-bar-item-container">
+    <app-header-toolbar-item name="Home"></app-header-toolbar-item>
+    <app-header-toolbar-item name="Boarding"></app-header-toolbar-item>
+    <app-header-toolbar-item name="Daycare"></app-header-toolbar-item>
+    <app-header-toolbar-item name="Grooming"></app-header-toolbar-item>
+    <app-header-toolbar-item name="App"></app-header-toolbar-item>
+    <app-header-toolbar-item name="Other"></app-header-toolbar-item>
+    <button
+    *ngIf="!isLoggedIn"
+      mat-button
+      mat-raised-button
+      color="#673ab7"
+      style="color: #673ab7;"
+      routerLink="register">
+      Sign in
+    </button>
+    <button
+    *ngIf="isLoggedIn"
+      mat-button
+      mat-raised-button
+      color="#673ab7"
+      (click)="signOut()"
+      style="color: #673ab7;"
+      routerLink="home">
+      Sign Out
+    </button>
+  </div>
 </mat-toolbar>

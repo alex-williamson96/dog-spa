@@ -1,21 +1,39 @@
-<form (submit)="login()">
-  <div class="form-group">
-    <label for="username">Username:</label>
-    <input
-      type="text"
-      class="form-control"
-      id="username"
-      name="username"
-      ngModel="credentials.username"/>
+<div class="container" style="padding-top: 10px;">
+  <div>
+    <h1>Welcome to Doggy dog daycare!</h1>
+    <p>Please sign in or register below.</p>
   </div>
-  <div class="form-group">
-    <label for="password">Password:</label>
-    <input
-      type="password"
-      class="form-control"
-      id="password"
-      name="password"
-      ngModel="credentials.password"/>
+  <div class="card">
+    <form class="sign-in-form" #signIn="ngForm">
+      <mat-form-field style="margin: 10px">
+        <input
+          matInput
+          placeholder="Username"
+          type="text"
+          name="username"
+          ngModel/>
+      </mat-form-field>
+      <mat-form-field>
+        <input
+          class="sign-in-form-item"
+          matInput
+          placeholder="Password"
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          ngModel/>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword">
+          <mat-icon>
+            {{ hidePassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+      <!-- {{ signIn.value | json }} -->
+      <button mat-raised-button class="sign-in-form-item" (click)="onSubmit(signIn.value)">Sign In</button>
+    </form>
+    <button mat-raised-button color="primary" (click)="register = !register" style="margin-bottom: 10px;">{{ register ? 'Hide Registration' : 'Register' }}</button>
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+</div>
+<app-register-page *ngIf="register"></app-register-page>

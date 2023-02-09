@@ -1,0 +1,42 @@
+<div class="container">
+  <form #register="ngForm">
+    <div class="container">
+      <mat-form-field>
+        <input matInput placeholder="Username" name="username" ngModel required/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Email" name="email" ngModel required/>
+      </mat-form-field>
+    </div>
+    <div class="container">
+      <mat-form-field>
+        <input matInput placeholder="First name" name="firstName" ngModel required/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Last name" name="lastName" ngModel required/>
+      </mat-form-field>
+    </div>
+    <div class="container" style="display: inline-flex;">
+      <app-phone-form (onPhoneChange)="onPhoneNumberChange($event)"></app-phone-form>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Password"
+          [type]="hidePassword ? 'password' : 'text'"
+          name="password"
+          ngModel
+          required/>
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidePassword = !hidePassword">
+          <mat-icon>
+            {{ hidePassword ? "visibility_off" : "visibility" }}
+          </mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <!-- {{ register.value | json }} -->
+  </form>
+  <button mat-stroked-button color="primary" (click)="onSubmit(register.value)">Submit Registration</button>
+</div>

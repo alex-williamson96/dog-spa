@@ -1,0 +1,10 @@
+.card {
+    display: inline-grid;
+    border-radius: 5px;
+    margin: 5px;
+    min-width: 60%;
+}
+
+.sign-in-form-item {
+    margin-left: 10px
+}

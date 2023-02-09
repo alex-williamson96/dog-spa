@@ -26,16 +26,17 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-
-@Injectable()
-export class XhrInterceptor implements HttpInterceptor {
-  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const xhr = req.clone({
-      headers: req.headers.set('X-Requested-With', 'XMLHttpRequest'),
-    });
-    return next.handle(xhr);
-  }
-}
+import { AppHomeComponent } from './app/app-home/app-home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RegisterPageComponent } from './pages/login-page/register-page/register-page.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { PhoneNumberInputComponent } from './pages/login-page/register-page/phone-number-input/phone-number-input.component';
+import { PhoneFormComponent } from './pages/login-page/register-page/phone-form/phone-form.component';
+import { httpInterceptorProviders } from './_helpers/auth.interceptors';
+import { BoardingComponent } from './app/app-pages/boarding/boarding.component';
+import { DaycareComponent } from './app/app-pages/daycare/daycare.component';
+import { GroomingComponent } from './app/app-pages/grooming/grooming.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,13 @@ export class XhrInterceptor implements HttpInterceptor {
     MobileSidenavComponent,
     MobileSidenavButtonComponent,
     LoginPageComponent,
+    AppHomeComponent,
+    RegisterPageComponent,
+    PhoneNumberInputComponent,
+    PhoneFormComponent,
+    BoardingComponent,
+    DaycareComponent,
+    GroomingComponent
   ],
   imports: [
     BrowserModule,
@@ -59,11 +67,12 @@ export class XhrInterceptor implements HttpInterceptor {
     MatButtonModule,
     MatSidenavModule,
     HttpClientModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    AppService,
-    { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true },
-  ],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

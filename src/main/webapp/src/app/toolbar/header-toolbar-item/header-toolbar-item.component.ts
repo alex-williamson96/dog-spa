@@ -10,9 +10,11 @@ export class HeaderToolbarItemComponent implements OnInit{
   @Input('name') name!: string;
   route = 'error';
 
-  constructor(private router: ActivatedRoute) {}
-
   ngOnInit() {
-    this.route = 'info/' + this.name.toLowerCase();
+    this.route = this.name.toLowerCase();
+
+    if (this.name === 'App') {
+      this.route = '/' + this.name.toLowerCase();
+    }
   }
 }

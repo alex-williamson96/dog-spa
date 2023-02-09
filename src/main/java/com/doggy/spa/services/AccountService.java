@@ -1,8 +1,7 @@
 package com.doggy.spa.services;
 
-import com.doggy.spa.models.Account;
-import org.springframework.stereotype.Service;
+import com.doggy.spa.models.User;
 
 public interface AccountService {
-    Account findByUsername(String username);
+    User findByUsername(String username);
 }

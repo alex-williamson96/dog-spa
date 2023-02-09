@@ -4,9 +4,9 @@
 }
 
 .mobile-navbar-item:hover {
-  color: purple;
+  color: #673ab7;
 }
 
 a.active {
-  color: purple;
+  color: #673ab7;
 }

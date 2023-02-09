@@ -1,0 +1,31 @@
+# Spring properties
+#server:
+#  use-forward-headers: true
+doggy.app:
+  jwtSecret: HRlELXqpSBfe3GdeGegRE
+  jwtExpirationMs: 86400000
+
+spring:
+  jpa:
+    database-platform.org.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    hibernate:
+      naming.implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+      ddl-auto: update
+    properties.hibernate:
+      format_sql: true
+      id.new_generator_mappings: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/doggy?useSSL=false
+    username: postgres
+    password: password
+    driverClassName: org.postgresql.Driver
+  security:
+    ignored:
+      - "*.bundle.*"
+#    oauth2:
+#      client:
+#        registration:
+#          google:
+#            client-id: ${G-CLIENT-ID} # google-client-id
+#            client-secret: ${G-CLIENT-SECRET} # google-client-secret
