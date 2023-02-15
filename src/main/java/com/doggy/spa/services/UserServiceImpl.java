@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class AccountServiceImpl implements AccountService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
@@ -17,4 +17,6 @@ public class AccountServiceImpl implements AccountService{
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
+
+
 }

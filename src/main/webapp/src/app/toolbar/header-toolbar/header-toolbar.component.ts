@@ -8,22 +8,13 @@ import { Router } from '@angular/router';
   templateUrl: './header-toolbar.component.html',
   styleUrls: ['./header-toolbar.component.css']
 })
-export class HeaderToolbarComponent implements DoCheck {
+export class HeaderToolbarComponent {
   isLoggedIn = false;
   storageService: StorageService;
 
-  constructor(storageService: StorageService, private router: Router) {
+  constructor(storageService: StorageService) {
     this.isLoggedIn = storageService.isLoggedIn();
-    this.storageService = storageService;
-  }
-  ngDoCheck(): void {
-    this.isLoggedIn = this.storageService.isLoggedIn();
   }
 
-  signOut() {
-    this.storageService.signOut();
-    this.router.navigateByUrl('home', {skipLocationChange: true})
-    .then(() => this.router.navigate(['home']));
-  }
 
 }

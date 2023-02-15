@@ -16,10 +16,11 @@
     </app-mobile-sidenav-button>
     <app-mobile-sidenav-button (click)="isOpen = !isOpen" name="Grooming">
     </app-mobile-sidenav-button>
-    <app-mobile-sidenav-button (click)="isOpen = !isOpen" name="Other">
+    <app-mobile-sidenav-button (click)="isOpen = !isOpen" [name]="isLoggedIn ? 'Profile' : 'App'">
     </app-mobile-sidenav-button>
+    <app-sign-in style="justify-content: center; display: flex;" (click)="isOpen = !isOpen"></app-sign-in>
   </mat-drawer>
-  <mat-drawer-content>
+  <mat-drawer-content style="width: 100%">
     <button mat-icon-button (click)="isOpen = !isOpen">
       <mat-icon>dehaze</mat-icon>
     </button>

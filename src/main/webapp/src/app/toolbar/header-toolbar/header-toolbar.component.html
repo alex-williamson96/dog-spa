@@ -4,26 +4,7 @@
     <app-header-toolbar-item name="Boarding"></app-header-toolbar-item>
     <app-header-toolbar-item name="Daycare"></app-header-toolbar-item>
     <app-header-toolbar-item name="Grooming"></app-header-toolbar-item>
-    <app-header-toolbar-item name="App"></app-header-toolbar-item>
-    <app-header-toolbar-item name="Other"></app-header-toolbar-item>
-    <button
-    *ngIf="!isLoggedIn"
-      mat-button
-      mat-raised-button
-      color="#673ab7"
-      style="color: #673ab7;"
-      routerLink="register">
-      Sign in
-    </button>
-    <button
-    *ngIf="isLoggedIn"
-      mat-button
-      mat-raised-button
-      color="#673ab7"
-      (click)="signOut()"
-      style="color: #673ab7;"
-      routerLink="home">
-      Sign Out
-    </button>
+    <app-header-toolbar-item [name]="isLoggedIn ? 'Profile' : 'App'"></app-header-toolbar-item>
+    <app-sign-in></app-sign-in>
   </div>
 </mat-toolbar>

@@ -26,7 +26,7 @@ import {
   HttpInterceptor,
   HttpRequest,
 } from '@angular/common/http';
-import { AppHomeComponent } from './app/app-home/app-home.component';
+import { AppHomeComponent } from './app/app-pages/app-home/app-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterPageComponent } from './pages/login-page/register-page/register-page.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,6 +37,8 @@ import { httpInterceptorProviders } from './_helpers/auth.interceptors';
 import { BoardingComponent } from './app/app-pages/boarding/boarding.component';
 import { DaycareComponent } from './app/app-pages/daycare/daycare.component';
 import { GroomingComponent } from './app/app-pages/grooming/grooming.component';
+import { SignInComponent } from './toolbar/sign-in/sign-in.component';
+import { ProfileComponent } from './app/app-pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import { GroomingComponent } from './app/app-pages/grooming/grooming.component';
     PhoneFormComponent,
     BoardingComponent,
     DaycareComponent,
-    GroomingComponent
+    GroomingComponent,
+    SignInComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

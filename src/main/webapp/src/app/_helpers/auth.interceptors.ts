@@ -25,31 +25,35 @@ export class HttpRequestInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authToken = this.storageService.getUser().token
-    console.log(this.storageService.getUser())
+
     req = req.clone({
-      withCredentials: false,
+      withCredentials: true,
       setHeaders: {Authorization: 'Bearer ' + authToken}
     });
 
-    console.log(req);
+    console.log(authToken)
 
-    return next.handle(req);
+    if (authToken === undefined || authToken === null) {
+      req = req.clone({
+        withCredentials: false,
+      });
+    }
 
-    // return next.handle(req).pipe(
-    //   catchError((error) => {
-    //     if (
-    //       error instanceof HttpErrorResponse &&
-    //       !req.url.includes('auth/signIn') &&
-    //       error.status === 401
-    //     ) {
-    //       return this.handle401Error(req, next);
-    //     }
+    return next.handle(req).pipe(
+      catchError((error) => {
+        if (
+          error instanceof HttpErrorResponse &&
+          !req.url.includes('auth/signIn') &&
+          error.status === 401
+        ) {
+          return this.handle401Error(req, next);
+        }
 
-    //     return throwError(() => {
-    //       return error
-    //     });
-    //   })
-    // );
+        return throwError(() => {
+          return error
+        });
+      })
+    );
   }
 
   private handle401Error(request: HttpRequest<any>, next: HttpHandler) {

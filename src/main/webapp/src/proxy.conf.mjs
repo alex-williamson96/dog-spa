@@ -2,7 +2,7 @@ export default [
     {
       context: [
           '/api/v1/auth',
-          '/api/v1/user',
+          '/api/v1/user/',
           '/api/v1/auth/signIn',
           '/api/v1/auth/register',
           '/api/v1/user/any',

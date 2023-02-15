@@ -11,16 +11,24 @@ export class MobileSidenavButtonComponent implements OnInit {
   @Input('name') name!: string;
   route = 'error';
   isLoggedIn: boolean;
+  storageService: StorageService;
 
   constructor(storageService: StorageService) {
-    this.isLoggedIn = storageService.isLoggedIn();
+    this.storageService = storageService;
   }
 
   ngOnInit() {
-    this.route = this.name.toLowerCase();
+    this.updateRoute();
+  }
 
+  updateRoute() {
+    this.isLoggedIn = this.storageService.isLoggedIn();
+    this.route = this.name.toLowerCase();
     if (this.isLoggedIn) {
-      this.route = '/app' + this.name.toLowerCase();
+      this.route = '/app/' + this.name.toLowerCase();
     }
   }
+
+
+
 }

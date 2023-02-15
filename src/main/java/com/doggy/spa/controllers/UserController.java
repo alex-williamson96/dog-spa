@@ -1,17 +1,24 @@
 package com.doggy.spa.controllers;
 
+import com.doggy.spa.models.User;
+import com.doggy.spa.security.services.UserDetailsImpl;
+import com.doggy.spa.services.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/api/v1/user")
 public class UserController {
+
+    @Autowired
+    UserServiceImpl userService;
 
     @GetMapping("/any")
     public String any() {
@@ -20,7 +27,7 @@ public class UserController {
     @GetMapping("/user")
     @PreAuthorize("hasRole('USER')")
     public String user() {
-        return "users, employees, and admins can access this";
+        return "welcome " + SecurityContextHolder.getContext().getAuthentication().getName();
     }
 
     @GetMapping("/employee")
@@ -33,6 +40,12 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     public String admin() {
         return "ony admins can see this";
+    }
+
+    @GetMapping()
+    public User getUserDetails() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
+        return userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 
 
