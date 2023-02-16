@@ -41,6 +41,15 @@ public class Dog {
     @Column
     private String medicalInformation;
 
+    @Column
+    private LocalDate createdDate;
+
+    @Column
+    private LocalDate updatedDate;
+
+    @Column
+    private String updatedByUser;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;

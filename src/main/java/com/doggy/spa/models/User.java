@@ -56,7 +56,6 @@ public class User {
     @JsonIgnore
     private List<String> stringRoles;
 
-    // One to many later for pet object
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(  name = "user_roles",

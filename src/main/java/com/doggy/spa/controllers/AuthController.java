@@ -13,6 +13,9 @@ import com.doggy.spa.repositories.UserRepository;
 import com.doggy.spa.security.jwt.JwtUtils;
 import com.doggy.spa.security.services.RefreshTokenService;
 import com.doggy.spa.security.services.UserDetailsImpl;
+import com.doggy.spa.services.AuthServiceImpl;
+import com.doggy.spa.services.RoleServiceImpl;
+import com.doggy.spa.services.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -36,15 +39,6 @@ import java.util.Set;
 @RequestMapping("api/v1/auth")
 public class AuthController {
     @Autowired
-    AuthenticationManager authenticationManager;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    RoleRepository roleRepository;
-
-    @Autowired
     PasswordEncoder encoder;
 
     @Autowired
@@ -53,12 +47,18 @@ public class AuthController {
     @Autowired
     RefreshTokenService refreshTokenService;
 
+    @Autowired
+    AuthServiceImpl authService;
+
+    @Autowired
+    RoleServiceImpl roleService;
+
+    @Autowired
+    UserServiceImpl userService;
+
     @PostMapping("/signIn")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
-        );
-
+        Authentication authentication = authService.getAuthentication(loginRequest);
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
@@ -78,13 +78,13 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody User newUser) {
-        if (userRepository.existsByUsername(newUser.getUsername())) {
+        if (userService.checkUsernameAvailability(newUser.getUsername())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username is already taken!"));
         }
 
-        if (userRepository.existsByEmail(newUser.getEmail())) {
+        if (userService.checkEmailAvailability(newUser.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already taken!"));
@@ -100,24 +100,24 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleService.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: User Role is not found"));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin" -> {
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                        Role adminRole = roleService.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Admin Role is not found"));
                         roles.add(adminRole);
                     }
                     case "employee" -> {
-                        Role employeeRole = roleRepository.findByName(ERole.ROLE_EMPLOYEE)
+                        Role employeeRole = roleService.findByName(ERole.ROLE_EMPLOYEE)
                                 .orElseThrow(() -> new RuntimeException("Error: Employee Role is not found"));
                         roles.add(employeeRole);
                     }
                     default -> {
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        Role userRole = roleService.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: User Role is not found"));
                         roles.add(userRole);
                     }
@@ -133,7 +133,7 @@ public class AuthController {
         user.setCreatedDate(LocalDate.now());
         user.setUpdatedDate(LocalDate.now());
 
-        userRepository.save(user);
+        userService.saveUser(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
     }

@@ -3,11 +3,10 @@ import { Injectable } from '@angular/core';
 const USER_KEY = 'auth-user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StorageService {
-
-  constructor() { }
+  constructor() {}
 
   clean(): void {
     window.sessionStorage.clear();
@@ -40,5 +39,33 @@ export class StorageService {
     window.sessionStorage.removeItem(USER_KEY);
   }
 
+  public getRole(): string {
+    const roles = this.getUser().roles;
+    if (roles.includes('ROLE_ADMIN')) {
+      return 'ROLE_ADMIN';
+    }
+
+    if (roles.includes('ROLE_EMPLOYEE')) {
+      return 'ROLE_EMPLOYEE';
+    }
+
+    if (roles.includes('ROLE_USER')) {
+      return 'ROLE_USER';
+    }
+
+    throw Error('No role found, please sign in.');
+  }
+
+  isAdmin(): boolean {
+    return this.getRole() === 'ROLE_ADMIN'
+  }
+
+  isEmployee(): boolean {
+    return this.getRole() === 'ROLE_EMPLOYEE'
+  }
+
+  isUser(): boolean {
+    return this.getRole() === 'ROLE_USER'
+  }
 
 }
