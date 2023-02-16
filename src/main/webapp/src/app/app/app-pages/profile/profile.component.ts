@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { User } from 'typeings';
+import { Component, OnInit } from '@angular/core';
+import { User } from 'typings';
 import { ProfileService } from '../../services/profile.service';
 import { Observable } from 'rxjs';
 
@@ -8,12 +8,14 @@ import { Observable } from 'rxjs';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   user$: Observable<User>;
 
-  constructor(profileService: ProfileService) {
-    this.user$ = profileService.user$.pipe(
-      
-    );
+  constructor(private profileService: ProfileService) {
+    
+  }
+
+  ngOnInit() {
+    this.user$ = this.profileService.user$;
   }
 }

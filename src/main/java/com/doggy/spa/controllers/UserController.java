@@ -42,9 +42,9 @@ public class UserController {
         return "ony admins can see this";
     }
 
-    @GetMapping()
+    @GetMapping
+    @PreAuthorize("hasRole('USER')")
     public User getUserDetails() {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getName());
         return userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
     }
 

@@ -31,8 +31,6 @@ export class HttpRequestInterceptor implements HttpInterceptor {
       setHeaders: {Authorization: 'Bearer ' + authToken}
     });
 
-    console.log(authToken)
-
     if (authToken === undefined || authToken === null) {
       req = req.clone({
         withCredentials: false,

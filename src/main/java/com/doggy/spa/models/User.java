@@ -1,11 +1,10 @@
 package com.doggy.spa.models;
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import java.time.LocalDate;
@@ -15,7 +14,10 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "app_user", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "username"),
+        @UniqueConstraint(columnNames = "email")
+})
 @Getter
 @Setter
 public class User {
@@ -23,12 +25,13 @@ public class User {
     @GeneratedValue(strategy= GenerationType.AUTO, generator="my_entity_seq_gen")
     @SequenceGenerator(name="my_entity_seq_gen", sequenceName="MY_ENTITY_SEQ")
     @Column
-    private Long id;
+    private Long userId;
 
     @Column
     private String username;
 
     @Column
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column
@@ -50,6 +53,7 @@ public class User {
     private String phoneNumber;
 
     @Transient
+    @JsonIgnore
     private List<String> stringRoles;
 
     // One to many later for pet object
@@ -59,6 +63,9 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Dog> dogs;
 
     public User() {
     }
@@ -74,7 +81,7 @@ public class User {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         User user = (User) o;
-        return id != null && Objects.equals(id, user.id);
+        return userId != null && Objects.equals(userId, user.userId);
     }
 
 }

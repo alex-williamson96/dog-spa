@@ -1,5 +1,5 @@
 <div *ngIf="user$ | async as userInfo else notFound">
-    {{ userInfo.firstName }} {{ userInfo.lastName }}
+    {{ userInfo | json }}
 </div>
 <ng-template #notFound>
     User not found!

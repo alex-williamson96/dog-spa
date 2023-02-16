@@ -1,21 +1,19 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User } from 'typeings';
+import { User } from 'typings';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProfileService {
-  http: HttpClient;
   user$: Observable<User>;
 
-  constructor(http: HttpClient) {
-    this.http = http;
+  constructor(private http: HttpClient) {
     this.user$ = this.getUserInfo();
   }
 
-  getUserInfo() {
-    return this.http.get<User>('http://localhost:8080/api/v1/user/', { responseType: 'json'});
+  getUserInfo(): Observable<User> {
+    return this.http.get<User>('/api/v1/user', { responseType: 'json'});
   }
 }

@@ -21,7 +21,7 @@ export class SignInComponent implements DoCheck {
 
   signOut() {
     this.storageService.signOut();
-    this.router.navigateByUrl('/home', {skipLocationChange: false})
+    this.router.navigateByUrl('/home')
     .then(() => this.router.navigate(['/home']));
   }
 

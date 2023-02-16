@@ -9,6 +9,7 @@ export interface User {
     lastName: string,
     phoneNumber: string,
     roles: Set<string>,
+    stringRoles: Set<string>,
     dogs: Set<Dog>
 }
 
@@ -16,5 +17,10 @@ export interface Dog {
     dogId?: string,
     name: string,
     birthday: Date,
-    
+    preferredVet: string,
+    emergencyContact: string,
+    ownerNotes: string,
+    privateNotes: string,
+    medicalInformation: string,
+    user: User
 }

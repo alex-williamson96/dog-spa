@@ -1,6 +1,8 @@
 package com.doggy.spa.controllers;
 
+import com.doggy.spa.exceptions.TokenRefreshException;
 import com.doggy.spa.models.ERole;
+import com.doggy.spa.models.RefreshToken;
 import com.doggy.spa.models.Role;
 import com.doggy.spa.models.User;
 import com.doggy.spa.models.internal.request.LoginRequest;
@@ -9,8 +11,12 @@ import com.doggy.spa.models.internal.response.MessageResponse;
 import com.doggy.spa.repositories.RoleRepository;
 import com.doggy.spa.repositories.UserRepository;
 import com.doggy.spa.security.jwt.JwtUtils;
+import com.doggy.spa.security.services.RefreshTokenService;
 import com.doggy.spa.security.services.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -44,12 +50,14 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    RefreshTokenService refreshTokenService;
+
     @PostMapping("/signIn")
     public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
-
 
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -128,5 +136,26 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully"));
+    }
+
+    @PostMapping("/refreshToken")
+    public ResponseEntity<?> refreshToken(HttpServletRequest request) {
+        String refreshToken = jwtUtils.getJwtRefreshFromCookies(request);
+
+        if ((refreshToken != null) && (refreshToken.length() > 0)) {
+            return refreshTokenService.findByToken(refreshToken)
+                    .map(refreshTokenService::verifyExpiration)
+                    .map(RefreshToken::getUser)
+                    .map(user -> {
+                        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(UserDetailsImpl.build(user));
+
+                        return ResponseEntity.ok()
+                                .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
+                                .body(new MessageResponse("Token is refreshed successfully!"));
+                    })
+                    .orElseThrow(() -> new TokenRefreshException(refreshToken,
+                            "Refresh token is not in database!"));
+        }
+        return ResponseEntity.badRequest().body(new MessageResponse("Refresh Token is empty!"));
     }
 }

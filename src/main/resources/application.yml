@@ -4,6 +4,9 @@
 doggy.app:
   jwtSecret: HRlELXqpSBfe3GdeGegRE
   jwtExpirationMs: 86400000
+  jwtRefreshExpirationMs: 86400000
+  jwtCookieName: doggy-jwt
+  jwtRefreshCookieName: doggy-jwt-refresh
 
 spring:
   jpa:

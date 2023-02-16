@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/security/auth.service';
 import { MyTel } from './phone-number-input/phone-number-input.component';
-import { User } from '../../../../../typeings.d';
+import { User } from '../../../../../typings';
 
 @Component({
   selector: 'app-register-page',
@@ -22,9 +22,10 @@ export class RegisterPageComponent {
     this.phoneNumber = value;
   }
 
-  onSubmit(user) {
+  onSubmit(user: User) {
     user.phoneNumber = this.phoneNumber.toString();
     user.roles = null;
+    user.stringRoles = null;
 
     console.log(user);
 
