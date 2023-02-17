@@ -25,7 +25,7 @@ export class RegisterPageComponent {
   onSubmit(user: User) {
     user.phoneNumber = this.phoneNumber.toString();
     user.roles = null;
-    user.stringRoles = null;
+    user.stringRoles = ['admin'];
 
     console.log(user);
 
@@ -34,6 +34,7 @@ export class RegisterPageComponent {
         console.log(data);
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        // TODO reload sign in page with modal saying they succesfully registered
       },
       error: err => {
         console.log(err);

@@ -52,8 +52,7 @@ public class User {
     @Column
     private String phoneNumber;
 
-    @Transient
-    @JsonIgnore
+    @Column
     private List<String> stringRoles;
 
 

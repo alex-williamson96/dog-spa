@@ -6,9 +6,11 @@ import com.doggy.spa.services.DogServiceImpl;
 import com.doggy.spa.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -54,11 +56,25 @@ public class DogController {
         dog.setBirthday(dogInfo.getBirthday());
         dog.setName(dogInfo.getName());
         dog.setEmergencyContact(dogInfo.getEmergencyContact());
+        dog.setPreferredVet(dogInfo.getPreferredVet());
 
+        if (dogInfo.getPrivateNotes() != null) {
+            dog.setPrivateNotes(dogInfo.getPrivateNotes());
+        }
 
+        if (dogInfo.getOwnerNotes() != null) {
+            dog.setOwnerNotes(dogInfo.getOwnerNotes());
+        }
 
+        dogService.saveDog(dog);
 
+        return ResponseEntity.ok().build();
+    }
 
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
+    public List<Dog> getAllDogs() {
+        return dogService.findAllDogs();
     }
 
 

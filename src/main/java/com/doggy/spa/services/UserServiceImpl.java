@@ -1,9 +1,12 @@
 package com.doggy.spa.services;
 
+import com.doggy.spa.models.ERole;
 import com.doggy.spa.models.User;
 import com.doggy.spa.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,5 +32,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public Boolean checkEmailAvailability(String email) {
         return userRepository.existsByUsername(email);
+    }
+
+    @Override
+    public List<User> getAllCustomers() {
+        return userRepository.findAllByRoles_Name(ERole.ROLE_USER);
+    }
+
+    @Override
+    public List<User> getAllEmployees() {
+        return userRepository.findAllByRoles_Name(ERole.ROLE_EMPLOYEE);
     }
 }

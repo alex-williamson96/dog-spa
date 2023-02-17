@@ -2,6 +2,8 @@ package com.doggy.spa.services;
 
 import com.doggy.spa.models.User;
 
+import java.util.List;
+
 public interface UserService {
     User findByUsername(String username);
 
@@ -10,4 +12,8 @@ public interface UserService {
     Boolean checkEmailAvailability(String email);
 
     User saveUser(User user);
+
+    List<User> getAllCustomers();
+
+    List<User> getAllEmployees();
 }

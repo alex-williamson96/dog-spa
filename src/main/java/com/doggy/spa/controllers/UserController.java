@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/employee")
-    @PreAuthorize("hasRole('EMPLOYEE') or hasAuthority('ADMIN')")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
     public String worker() {
         return "only workers and admins can see this";
     }
@@ -43,9 +44,15 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN') or hasRole('USER')")
     public User getUserDetails() {
         return userService.findByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
+    }
+
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
+    public List<User> getAllCustomers() {
+        return userService.getAllCustomers();
     }
 
 

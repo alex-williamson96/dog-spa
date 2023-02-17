@@ -99,6 +99,8 @@ public class AuthController {
         List<String> strRoles = newUser.getStringRoles();
         Set<Role> roles = new HashSet<>();
 
+        System.out.println(strRoles);
+
         if (strRoles == null) {
             Role userRole = roleService.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: User Role is not found"));

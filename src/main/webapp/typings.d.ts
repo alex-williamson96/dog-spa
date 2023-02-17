@@ -9,7 +9,7 @@ export interface User {
     lastName: string,
     phoneNumber: string,
     roles: Set<string>,
-    stringRoles: Set<string>,
+    stringRoles: string[],
     dogs: Set<Dog>
 }
 
