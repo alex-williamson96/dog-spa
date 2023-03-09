@@ -10,6 +10,11 @@ import { BoardingComponent } from './app/app-pages/boarding/boarding.component';
 import { DaycareComponent } from './app/app-pages/daycare/daycare.component';
 import { GroomingComponent } from './app/app-pages/grooming/grooming.component';
 import { ProfileComponent } from './app/app-pages/profile/profile.component';
+import { DogCreateComponent } from './app/app-pages/create/dog-create/dog-create.component';
+import { CustomerCreateComponent } from './app/app-pages/create/customer-create/customer-create.component';
+import { DogLookupComponent } from './app/app-pages/lookup/dog-lookup/dog-lookup.component';
+import { CustomerLookupComponent } from './app/app-pages/lookup/customer-lookup/customer-lookup.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -22,16 +27,15 @@ const routes: Routes = [
 
   { path: 'register', component: LoginPageComponent },
 
-  {
-    path: 'app',
-    children: [
-      { path: 'home', component: AppHomeComponent },
-      { path: 'boarding', component: BoardingComponent },
-      { path: 'daycare', component: DaycareComponent },
-      { path: 'grooming', component: GroomingComponent },
-      { path: 'profile', component: ProfileComponent },
-    ],
-  },
+  { path: 'app/home', component: AppHomeComponent },
+  { path: 'app/boarding', component: BoardingComponent },
+  { path: 'app/daycare', component: DaycareComponent },
+  { path: 'app/grooming', component: GroomingComponent },
+  { path: 'app/profile', component: ProfileComponent },
+  { path: 'app/create/dog', component: DogCreateComponent},
+  { path: 'app/create/customer', component: CustomerCreateComponent},
+  { path: 'app/lookup/dog', component: DogLookupComponent},
+  { path: 'app/lookup/customer', component: CustomerLookupComponent},
 
   { path: 'error', redirectTo: 'info/home' },
   { path: '**', redirectTo: 'info/home' },

@@ -16,4 +16,9 @@ export class ProfileService {
   getUserInfo(): Observable<User> {
     return this.http.get<User>('/api/v1/user', { responseType: 'json'});
   }
+
+  getAllCustomers(): Observable<User[]> {
+    return this.http.get<User[]>('/api/v1/user/all', { responseType: 'json'});
+  }
+
 }

@@ -1,0 +1,4 @@
+<p>customer-lookup works!</p>
+<div class="container" *ngIf="customerList$ | async as customerList">
+  <app-customer-table [customerList]="customerList"></app-customer-table>
+</div>

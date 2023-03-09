@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { User } from 'typings';
 
 const API_URL = '/api/v1/user/';
 
@@ -25,5 +26,9 @@ export class UserService {
 
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
+  }
+
+  getAllCustomers(): Observable<User[]> {
+    return this.http.get<User[]>(API_URL + 'all', { responseType: 'json' })
   }
 }

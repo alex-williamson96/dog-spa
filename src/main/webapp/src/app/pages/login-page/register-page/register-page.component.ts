@@ -25,7 +25,6 @@ export class RegisterPageComponent {
   onSubmit(user: User) {
     user.phoneNumber = this.phoneNumber.toString();
     user.roles = null;
-    user.stringRoles = ['admin'];
 
     console.log(user);
 

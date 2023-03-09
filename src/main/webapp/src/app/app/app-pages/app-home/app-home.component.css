@@ -1,0 +1,25 @@
+.home-card {
+    font-size: 1.3em;
+    padding: 10px;
+    margin: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.sub-container {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+  text-align: center;
+}
+
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+mat-card { cursor: pointer; }

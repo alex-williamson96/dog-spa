@@ -23,9 +23,9 @@ public class DogController {
     @Autowired
     UserServiceImpl userService;
 
-    @GetMapping
-    public Dog getDogById(Long id) {
-        return dogService.findById(id).orElse(null);
+    @GetMapping("/{dogId}")
+    public Dog getDogById(@PathVariable("dogId") Long dogId) {
+        return dogService.findById(dogId).orElse(null);
     }
 
     @PostMapping("/create/{userName}")
@@ -41,30 +41,21 @@ public class DogController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<?> updateDog(@RequestBody Dog dogInfo) {
+    @PutMapping("/update/{userName}")
+    public ResponseEntity<?> updateDog(@RequestBody Dog dogInfo, @PathVariable("userName") String userName) {
         Optional<Dog> _dog = dogService.findById(dogInfo.getDogId());
 
         if (_dog.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
-        Dog dog = _dog.get();
+        User user = userService.findByUsername(userName);
 
-        dog.setUpdatedDate(LocalDate.now());
-        dog.setUpdatedByUser(dogInfo.getUpdatedByUser());
-        dog.setBirthday(dogInfo.getBirthday());
-        dog.setName(dogInfo.getName());
-        dog.setEmergencyContact(dogInfo.getEmergencyContact());
-        dog.setPreferredVet(dogInfo.getPreferredVet());
-
-        if (dogInfo.getPrivateNotes() != null) {
-            dog.setPrivateNotes(dogInfo.getPrivateNotes());
+        if (user == null) {
+            return ResponseEntity.notFound().build();
         }
 
-        if (dogInfo.getOwnerNotes() != null) {
-            dog.setOwnerNotes(dogInfo.getOwnerNotes());
-        }
+        Dog dog = dogService.updateAllDogInfo(_dog.get(), dogInfo, user);
 
         dogService.saveDog(dog);
 
@@ -76,6 +67,5 @@ public class DogController {
     public List<Dog> getAllDogs() {
         return dogService.findAllDogs();
     }
-
 
 }

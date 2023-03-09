@@ -50,6 +50,9 @@ public class Dog {
     @Column
     private String updatedByUser;
 
+    @Column
+    private String breed;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;

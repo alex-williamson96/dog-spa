@@ -55,5 +55,11 @@ public class UserController {
         return userService.getAllCustomers();
     }
 
+    @GetMapping("/employees")
+    @PreAuthorize("hasRole('ADMIN')")
+    public List<User> getAllEmployees() {
+        return userService.getAllEmployees();
+    }
+
 
 }

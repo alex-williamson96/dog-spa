@@ -16,6 +16,7 @@ export interface User {
 export interface Dog {
     dogId?: string,
     name: string,
+    breed: string,
     birthday: Date,
     preferredVet: string,
     emergencyContact: string,
