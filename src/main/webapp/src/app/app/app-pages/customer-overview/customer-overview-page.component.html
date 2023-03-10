@@ -1,0 +1,7 @@
+<div class="container" *ngIf="customer$ | async as customer; else noCustomer">
+    {{ customer | json}}
+</div>
+
+<ng-template #noCustomer>
+    No customer with id: {{ id }} found!
+</ng-template>

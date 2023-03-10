@@ -3,6 +3,7 @@ package com.doggy.spa.services;
 import com.doggy.spa.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User findByUsername(String username);
@@ -16,4 +17,6 @@ public interface UserService {
     List<User> getAllCustomers();
 
     List<User> getAllEmployees();
+
+    Optional<User> findById(Long id);
 }

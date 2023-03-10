@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource, MatTableDataSourcePaginator } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { User } from 'typings';
 
 @Component({
@@ -12,6 +13,10 @@ export class CustomerTableComponent implements OnInit {
   dataSource: MatTableDataSource<User, MatTableDataSourcePaginator>;
   displayedColumns = ['firstName', 'lastName', 'email', 'phoneNumber', 'dogs'];
 
+  constructor(private route: Router) {
+    
+  }
+
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.customerList);
@@ -20,5 +25,9 @@ export class CustomerTableComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  handleRowClick(customer: User) {
+    this.route.navigate(['/customer/', customer.userId]);
   }
 }

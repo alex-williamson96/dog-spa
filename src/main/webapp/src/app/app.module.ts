@@ -47,6 +47,9 @@ import { CustomerLookupComponent } from './app/app-pages/lookup/customer-lookup/
 import { DogLookupComponent } from './app/app-pages/lookup/dog-lookup/dog-lookup.component';
 import { CustomerTableComponent } from './app/app-pages/lookup/customer-lookup/customer-table/customer-table.component';
 import { DogTableComponent } from './app/app-pages/lookup/dog-lookup/dog-table/dog-table.component';
+import { CustomerOverviewPageComponent } from './app/app-pages/customer-overview/customer-overview-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -81,7 +84,8 @@ import { DogTableComponent } from './app/app-pages/lookup/dog-lookup/dog-table/d
     CustomerLookupComponent,
     DogLookupComponent,
     CustomerTableComponent,
-    DogTableComponent
+    DogTableComponent,
+    CustomerOverviewPageComponent
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,8 @@ import { DogTableComponent } from './app/app-pages/lookup/dog-lookup/dog-table/d
     ReactiveFormsModule,
     MatCardModule,
     MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],

@@ -61,5 +61,11 @@ public class UserController {
         return userService.getAllEmployees();
     }
 
+    @GetMapping("/{userId}")
+    @PreAuthorize("hasRole('EMPLOYEE') or hasRole('ADMIN')")
+    public User getCustomerInfoById(@PathVariable("userId") Long userId) {
+        return userService.findById(userId).orElse(null);
+    }
+
 
 }

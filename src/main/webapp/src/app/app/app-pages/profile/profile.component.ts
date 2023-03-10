@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'typings';
-import { ProfileService } from '../../services/profile.service';
+import { CustomerService } from '../../services/customer.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 export class ProfileComponent implements OnInit {
   user$: Observable<User>;
 
-  constructor(private profileService: ProfileService) {
+  constructor(private profileService: CustomerService) {
     
   }
 

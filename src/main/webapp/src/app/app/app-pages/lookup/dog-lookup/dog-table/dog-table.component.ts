@@ -10,7 +10,7 @@ import { User } from 'typings';
 export class DogTableComponent {
   @Input('customerList') customerList: User[];
   dataSource: MatTableDataSource<User, MatTableDataSourcePaginator>;
-  displayedColumns = ['firstName', 'lastName', 'email', 'phoneNumber', 'dogs'];
+  displayedColumns = ['name', 'breed', 'user'];
 
 
   ngOnInit(): void {

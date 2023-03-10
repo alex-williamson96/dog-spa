@@ -1,1 +1,41 @@
 <p>dog-create works!</p>
+<div class="container">
+  <form #form="ngForm">
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="name">Name</mat-label>
+        <input matInput name="name" [(ngModel)]="dog.name" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="breed">Breed</mat-label>
+        <input matInput name="breed" [(ngModel)]="dog.breed" />
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Birthday</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          name="birthday"
+          [(ngModel)]="dog.birthday"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="Vet">Vet</mat-label>
+        <input matInput name="preferredVet" [(ngModel)]="dog.preferredVet" />
+      </mat-form-field>
+    </div>
+        <app-phone-form></app-phone-form>
+  </form>
+</div>
+{{ form.value | json }}

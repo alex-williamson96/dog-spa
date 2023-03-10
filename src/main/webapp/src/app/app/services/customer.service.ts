@@ -6,7 +6,7 @@ import { User } from 'typings';
 @Injectable({
   providedIn: 'root',
 })
-export class ProfileService {
+export class CustomerService {
   user$: Observable<User>;
 
   constructor(private http: HttpClient) {
@@ -19,6 +19,10 @@ export class ProfileService {
 
   getAllCustomers(): Observable<User[]> {
     return this.http.get<User[]>('/api/v1/user/all', { responseType: 'json'});
+  }
+
+  getCustomerInfo(userId: string): Observable<User> {
+    return this.http.get<User>('/api/v1/user/' + userId, { responseType: 'json'});
   }
 
 }

@@ -15,6 +15,7 @@ import { CustomerCreateComponent } from './app/app-pages/create/customer-create/
 import { DogLookupComponent } from './app/app-pages/lookup/dog-lookup/dog-lookup.component';
 import { CustomerLookupComponent } from './app/app-pages/lookup/customer-lookup/customer-lookup.component';
 import { CommonModule } from '@angular/common';
+import { CustomerOverviewPageComponent } from './app/app-pages/customer-overview/customer-overview-page.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'home' },
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'app/create/customer', component: CustomerCreateComponent},
   { path: 'app/lookup/dog', component: DogLookupComponent},
   { path: 'app/lookup/customer', component: CustomerLookupComponent},
+  { path: 'customer/:customerId', component: CustomerOverviewPageComponent},
 
   { path: 'error', redirectTo: 'info/home' },
   { path: '**', redirectTo: 'info/home' },
