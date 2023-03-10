@@ -35,7 +35,13 @@
         <input matInput name="preferredVet" [(ngModel)]="dog.preferredVet" />
       </mat-form-field>
     </div>
-        <app-phone-form></app-phone-form>
+    <div class="form-group">
+      <app-phone-form
+        [phoneNumber]="dog.emergencyContact"
+        phoneNumberPretext="Emergency Contact"
+        formName="emergencyContact"
+      ></app-phone-form>
+    </div>
   </form>
 </div>
 {{ form.value | json }}

@@ -50,6 +50,7 @@ import { DogTableComponent } from './app/app-pages/lookup/dog-lookup/dog-table/d
 import { CustomerOverviewPageComponent } from './app/app-pages/customer-overview/customer-overview-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { PhoneValidatorDirective } from './pages/login-page/register-page/phone-form/phone-validator.directive';
 
 @NgModule({
   declarations: [
@@ -85,7 +86,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     DogLookupComponent,
     CustomerTableComponent,
     DogTableComponent,
-    CustomerOverviewPageComponent
+    CustomerOverviewPageComponent,
+    PhoneValidatorDirective
   ],
   imports: [
     BrowserModule,

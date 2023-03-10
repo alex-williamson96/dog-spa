@@ -1,9 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 .container {
-    text-align: center;
-    margin: 10px
+  text-align: center;
+  margin: 10px;
+}
+
+.alert {
+  background-color: #fed3d3;
+  color: #820000;
+  padding: 5px;
+  width: 30%;
+  margin: auto;
+  border-radius: 8px;
 }
