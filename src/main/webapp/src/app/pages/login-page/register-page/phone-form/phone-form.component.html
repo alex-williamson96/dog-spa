@@ -1,4 +1,4 @@
-<mat-form-field style="width: 35%">
+<mat-form-field>
   <mat-label>{{ phoneNumberPretext }}</mat-label>
   <input
     id="phoneNumber"
@@ -11,20 +11,10 @@
     appPhoneValidator
     maxlength="12"
     (ngModelChange)="handlePhoneNumberChange($event)"/>
+    <mat-error *ngIf="phoneNumber.errors?.['required']">
+      {{ phoneNumberPretext }} is required.
+    </mat-error>
+    <mat-error *ngIf="phoneNumber.errors?.['phoneValidator']">
+      Phone number must be the correct format: ###-###-####
+    </mat-error>
 </mat-form-field>
-
-<div
-  *ngIf="phoneNumber.invalid && (phoneNumber.dirty || phoneNumber.touched)"
-  class="alert">
-
-  <p *ngIf="phoneNumber.errors?.['required']">
-    {{ phoneNumberPretext }} is required.
-  </p>
-
-  <p *ngIf="phoneNumber.errors?.['phoneValidator']">
-    Phone number must be the correct format: ###-###-####
-  </p>
-
-</div>
-
-<p>{{ phoneNumber.errors | json }}</p>

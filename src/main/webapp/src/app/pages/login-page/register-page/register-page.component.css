@@ -1,3 +1,14 @@
 mat-form-field {
     padding-left: 10px;
 }
+
+.two-row {
+    width: 17.5%
+}
+
+@media (max-width:700px) {
+    .two-row {
+        width: 100%
+    }
+    
+}

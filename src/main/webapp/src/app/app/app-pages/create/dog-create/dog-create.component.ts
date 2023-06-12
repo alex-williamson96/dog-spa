@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Dog } from 'typings';
+import { Dog, User } from 'typings';
 
 @Component({
   selector: 'app-dog-create',
@@ -16,6 +16,17 @@ export class DogCreateComponent {
     ownerNotes: '',
     privateNotes: '',
     medicalInformation: '',
-    user: undefined
+    user: {
+      username: '',
+      password: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      roles: undefined,
+      stringRoles: [],
+      dogs: undefined
+    }
   };
+
 }

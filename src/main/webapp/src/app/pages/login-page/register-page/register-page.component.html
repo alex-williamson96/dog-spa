@@ -1,22 +1,25 @@
 <div class="container">
   <form #register="ngForm">
     <div class="container">
-      <mat-form-field>
+      <mat-form-field class="two-row">
         <input matInput placeholder="Username" name="username" ngModel required/>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="two-row">
         <input matInput placeholder="Email" name="email" ngModel required/>
       </mat-form-field>
     </div>
     <div class="container">
-      <mat-form-field>
+      <mat-form-field class="two-row">
         <input matInput placeholder="First name" name="firstName" ngModel required/>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field class="two-row">
         <input matInput placeholder="Last name" name="lastName" ngModel required/>
       </mat-form-field>
     </div>
-    <div class="container" style="display: inline-flex;">
+    <div class="container">
+      <app-phone-form style="padding-left: 10px;"></app-phone-form>
+    </div>
+    <div class="container">
       <mat-form-field>
         <input
           matInput

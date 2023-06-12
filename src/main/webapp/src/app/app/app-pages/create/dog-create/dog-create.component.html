@@ -42,6 +42,30 @@
         formName="emergencyContact"
       ></app-phone-form>
     </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="privateNotes">Notes (employee only)</mat-label>
+        <textarea
+        matInput
+        name="privateNotes"
+        [(ngModel)]="dog.privateNotes"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="medicalInformation">Medical Information</mat-label>
+        <textarea
+        matInput
+        name="medicalInformation"
+        [(ngModel)]="dog.medicalInformation"></textarea>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label for="email">Owner Email</mat-label>
+        <input matInput name="preferredVet" [(ngModel)]="dog.user.email" />
+      </mat-form-field>
+    </div>
   </form>
 </div>
 {{ form.value | json }}
